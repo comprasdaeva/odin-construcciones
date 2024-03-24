@@ -1,33 +1,24 @@
 <?php
 
-if($_SERVER['REQUEST_METHOD'] != 'POST'){
-    header("location: index.html");
-} 
-die();
+//llamados a los campos
+$nombre = $_POST['nombre'];
+$telefono = $_POST['telefono'];
+$email = $_POST['email'];
+$mensaje = $_POST['mensaje'];
 
-$nombre = $_POST['nombre'],
-$telefono = $_POST['telefono'],
-$email = $_POST['email'],
-$mensaje = $_POST['mensaje'],
+//Datos para el correo 
 
-if (empty(trim($nombre))) $nombre = 'anonimo';
+$destinatario = "carolinainesdelgado@gmail.com";
+$asunto = "Contacto de la WEB ODIN CONTRUCCIONES";
 
-$body = <<<HTML 
-    <h1>Contacto desde la web</h1>
-    <p>Enviado por: $nombre</p>
-    <p>Contacto: $telefono</p>
-    <p>Email: $email</p>
-    <h3>Mensaje:</h3>
-    $mensaje
-HTML;
+$carta = "De: $nombre \n";
+$carta .= "Telefono: $telefono \n";
+$carta .= "Email: $email \n";
+$carta .= "Mensaje: $mensaje";
 
-$headers = "MIME-Version: 1.0 \r\n";
-$headers. = "Content-type: text/html; charset=utf-8 \r\n";
-$headers. = "From: $nombre <$email> \r\n";
-$headers. = "To: Formulario trabaja con nosotros <carolinainesdelgado@gmail.com \r\n";
-$headers. = "Cc: copia@email.com \r\n";
-$headers. = "Bcc: copia@email.com \r\n";
+//ENVIANDO MENSAJE
 
-$rta = mail('carolinainesdelgado@gmail.com', "envio de CV: $nombre", $body, $headers);
+mail($destinatario, $asunto, $carta);
+header('Location:mensaje-de-envio.html')
 
-header("location: index.html")
+?>

@@ -95,3 +95,5 @@ function initCounterOnScroll() {
 
 // Llama a la función principal para inicializar el contador al desplazarse
 initCounterOnScroll();
+
+
